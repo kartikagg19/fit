@@ -1,53 +1,79 @@
 import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
+import Login from "@/pages/Login";
+import AppShell from "@/components/AppShell";
+import Dashboard from "@/pages/Dashboard";
+import Members from "@/pages/Members";
+import MemberDetail from "@/pages/MemberDetail";
+import Memberships from "@/pages/Memberships";
+import CheckIn from "@/pages/CheckIn";
+import Attendance from "@/pages/Attendance";
+import Trainers from "@/pages/Trainers";
+import Payments from "@/pages/Payments";
+import Expenses from "@/pages/Expenses";
+import Reports from "@/pages/Reports";
+import Leads from "@/pages/Leads";
+import Branches from "@/pages/Branches";
+import Notifications from "@/pages/Notifications";
+import Settings from "@/pages/Settings";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+function Protected({ children }) {
+  const { user, ready } = useAuth();
+  const location = useLocation();
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <div className="font-display text-2xl text-white/60 tracking-widest">FITMORE</div>
+      </div>
+    );
+  }
+  if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
+  return children;
+}
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+function RootRedirect() {
+  const { user, ready } = useAuth();
+  if (!ready) return null;
+  return <Navigate to={user ? "/dashboard" : "/login"} replace />;
+}
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <AuthProvider>
+          <Toaster theme="dark" position="top-right" />
+          <Routes>
+            <Route path="/" element={<RootRedirect />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              element={
+                <Protected>
+                  <AppShell />
+                </Protected>
+              }
+            >
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/members" element={<Members />} />
+              <Route path="/members/:id" element={<MemberDetail />} />
+              <Route path="/memberships" element={<Memberships />} />
+              <Route path="/checkin" element={<CheckIn />} />
+              <Route path="/attendance" element={<Attendance />} />
+              <Route path="/trainers" element={<Trainers />} />
+              <Route path="/payments" element={<Payments />} />
+              <Route path="/expenses" element={<Expenses />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/leads" element={<Leads />} />
+              <Route path="/branches" element={<Branches />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
