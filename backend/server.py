@@ -969,10 +969,18 @@ async def on_shutdown():
 # -------------------------------------------------------------------
 app.include_router(api)
 
+cors_origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
+if "https://fitg-one.vercel.app" not in cors_origins:
+    cors_origins.append("https://fitg-one.vercel.app")
+if "http://localhost:3000" not in cors_origins:
+    cors_origins.append("http://localhost:3000")
+if not cors_origins:
+    cors_origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get("CORS_ORIGINS", "https://fitg-one.vercel.app,https://fit-one.vercel.app,http://localhost:3000").split(","),
+    allow_origins=cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
