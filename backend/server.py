@@ -745,8 +745,8 @@ async def plan_distribution(user: dict = Depends(get_current_user)):
 # Seeding
 # -------------------------------------------------------------------
 async def seed_data():
-    admin_email = os.environ["ADMIN_EMAIL"].lower()
-    admin_password = os.environ["ADMIN_PASSWORD"]
+    admin_email = os.environ.get("ADMIN_EMAIL", "aggarwalkartik688@gmail.com").lower()
+    admin_password = os.environ.get("ADMIN_PASSWORD", "Fitmore@123")
 
     # Admin/owner
     existing = await db.users.find_one({"email": admin_email})
