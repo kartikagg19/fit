@@ -972,7 +972,7 @@ app.include_router(api)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get("CORS_ORIGINS", "*").split(","),
+    allow_origins=os.environ.get("CORS_ORIGINS", "https://fitg-one.vercel.app,https://fit-one.vercel.app,http://localhost:3000").split(","),
     allow_methods=["*"],
     allow_headers=["*"],
 )
