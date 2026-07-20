@@ -1,0 +1,108 @@
+{
+  "theme": "dark",
+  "archetype": "THE PERFORMANCE PRO (Elite Athleticism & Precision)",
+  "vibe": "Tactical Minimalism, high-contrast, bold, premium SaaS OS for gym operations.",
+  "colors": {
+    "background": "#050505",
+    "surface": "#0A0A0A",
+    "surface_elevated": "#141414",
+    "primary": "#FF3B30",
+    "primary_hover": "#FF5C53",
+    "secondary": "#007AFF",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A3A3A3",
+    "text_tertiary": "#737373",
+    "border": "#262626",
+    "success": "#34C759",
+    "warning": "#FF9500",
+    "danger": "#FF3B30",
+    "neon_accent": "#D4FF00",
+    "forbidden_colors": ["#7351B7", "#1B93A4"]
+  },
+  "typography": {
+    "headings": {
+      "family": "Oswald, Anton, or Barlow Condensed",
+      "style": "uppercase, tracking-tighter, font-black",
+      "rule": "Avoid Inter/Roboto for headings. We need a heavy-weight athletic feel."
+    },
+    "body": {
+      "family": "DM Sans, Manrope, or Inter",
+      "style": "tracking-normal",
+      "rule": "Use geometric sans for maximum legibility of data and dashboards."
+    },
+    "forbidden_fonts": ["Space Grotesk"]
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing: 2-3x more spacing than typical templates.",
+    "dashboard_grid": "Mode B: High Density Grid. grid-cols-1 md:grid-cols-4. gap-4 or gap-6. Every pixel utilized. h-full on children.",
+    "cards": "Cardless or sharp edges (max 4px radius). Use 1px solid strokes (border-white/10). No soft shadows."
+  },
+  "components": {
+    "surfaces": "Solid flat backgrounds. NO complete transparent backgrounds in headers or overlays. Use Glassmorphism (backdrop-blur-xl bg-black/60) or solid colors.",
+    "buttons": "Sharp buttons or slight radius (4px). Explicit hover states (hover:bg-[#FF5C53] hover:text-white).",
+    "forms": "Use Shadcn UI (input, select, checkbox). Strip Vercel-look. Darker inputs (bg-[#141414] border-[#262626]). Focus must be high contrast.",
+    "charts": "Shadcn charts or Recharts. Bright thin lines, dark tooltips, no heavy light backgrounds."
+  },
+  "visual_enhancers": {
+    "motion": "Hover states on all interactive elements. -translate-y-1. DO NOT use 'transition: all'. Apply to specific properties.",
+    "textures": "Subtle noise overlay or pure matte finishes. No glossy gradients.",
+    "borders": "Expose the grid: border-r border-b border-border/40."
+  },
+  "media": {
+    "image_urls": {
+      "login_hero": {
+        "url": "https://images.pexels.com/photos/29392546/pexels-photo-29392546.jpeg",
+        "description": "Dark atmospheric gym for auth screen background"
+      },
+      "dashboard_banner": {
+        "url": "https://images.pexels.com/photos/35540076/pexels-photo-35540076.jpeg",
+        "description": "Athletic man working out - use for promotional or membership cards"
+      },
+      "trainer_1": {
+        "url": "https://images.unsplash.com/photo-1548690312-e3b507d8c110",
+        "description": "Female trainer profile picture"
+      },
+      "trainer_2": {
+        "url": "https://images.pexels.com/photos/8612464/pexels-photo-8612464.jpeg",
+        "description": "Male trainer profile picture"
+      },
+      "athlete_1": {
+        "url": "https://images.pexels.com/photos/733505/pexels-photo-733505.jpeg",
+        "description": "Member profile picture"
+      }
+    },
+    "rules": "Never use placeholder images. Always use provided URLs or colored initials."
+  },
+  "accessibility": {
+    "contrast": "Ensure WCAG AA contrast. 4.5:1 for normal text.",
+    "focus": "High contrast focus rings. focus:ring-2 focus:ring-[#FF3B30] focus:ring-offset-2 focus:ring-offset-black."
+  },
+  "instructions_to_main_agent": [
+    "Use .js files for React components, not .tsx files.",
+    "Use 'lucide-react' for standard icons. Install if needed.",
+    "Use 'sonner' for toasts. Found at /app/src/components/ui/sonner.js",
+    "All interactive elements (buttons, inputs, links, list items) MUST include a 'data-testid' attribute in kebab-case format (e.g., data-testid='login-submit-button').",
+    "For the gym operating system, focus on dense, actionable dashboard modules: Member Management, Attendence Heatmaps, Trainer Rosters.",
+    "Never use 'text-align: center' globally on the App."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN.",
+    "Prioritize using pre-existing components from src/components/ui when applicable.",
+    "Create new components that match the style and conventions of existing components when needed.",
+    "Examine existing components to understand the project's component patterns before creating new ones.",
+    "Use sonner for toasts.",
+    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
+  ]
+}
