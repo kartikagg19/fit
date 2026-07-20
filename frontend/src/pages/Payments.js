@@ -37,7 +37,7 @@ export default function Payments() {
   const stats = useMemo(() => {
     const now = new Date();
     const monthPrefix = now.toISOString().slice(0, 7);
-    const thisMonth = payments.filter((p) => p.created_at.startsWith(monthPrefix));
+    const thisMonth = payments.filter((p) => p.created_at?.startsWith(monthPrefix));
     return {
       total: payments.reduce((s, p) => s + p.amount, 0),
       month: thisMonth.reduce((s, p) => s + p.amount, 0),
@@ -178,6 +178,10 @@ function PaymentDialog({ members, plans, onSaved }) {
 function InvoiceDialog({ p }) {
   return (
     <DialogContent className="bg-white text-black rounded-none max-w-lg p-0 border-0">
+      <DialogHeader className="sr-only">
+        <DialogTitle>Invoice {p.invoice_no}</DialogTitle>
+        <DialogDescription>Printable invoice for {p.member_name}</DialogDescription>
+      </DialogHeader>
       <div className="p-8 space-y-6">
         <div className="flex justify-between items-start">
           <div>
